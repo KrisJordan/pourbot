@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+# post-receive
+deploy_to_dir = '/path/to/deploy/dir'
+
+# 1. Read STDIN (Format: "from_commit to_commit branch_name")
+from, to, branch = ARGF.read.split " "
+
+# 2. Only deploy if master branch was pushed
+if (branch =~ /master$/) == nil
+    puts " --> Received branch #{branch}, not building."
+    exit
+end
+
+# 3. Copy files to deploy directory
+`GIT_WORK_TREE="#{deploy_to_dir}" git checkout -f master`
+puts " --> master(#{to}) copied to '#{deploy_to_dir}'"
+
+# 4. Build
+build_id  = to[0..7]
+build_dir = "#{deploy_to_dir}/builds/#{build_id}"
+`mkdir -p "#{build_dir}"`
+
+# 4.1 Build & Deploy Arduino Code
+arduino_dir = "#{build_dir}/arduino"
+`cp -r "#{deploy_to_dir}/arduino" "#{arduino_dir}"`
+Dir.chdir arduino_dir
+puts `ino clean && ino build && sudo ino upload`
+puts " --> Arduino Code updated"
