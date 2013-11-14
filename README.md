@@ -1,5 +1,8 @@
-* pourbot
-** Arduino-powered coffee machine
+pourbot
+=======
+
+Arduino-powered coffee machine
+------------------------------
 
 Just tinkering around.
 
