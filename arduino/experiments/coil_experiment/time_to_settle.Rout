@@ -1,0 +1,80 @@
+
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> # Time to Impact
+> 
+> data <- read.table("./input.csv", header=TRUE, sep=",")
+> 
+> for (i in 10:1) {
++     focus   <- subset(data, experiment==i)
++     if(nrow(focus) > 0) {
++         v_line  <- focus[focus$v == max(focus$v),]
++         print(v_line)
++     }
++ }
+     experiment pulse     t v_filter   v
+1947         10     0 60156      546 547
+1948         10     0 61159      546 547
+1951         10     0 64166      546 547
+     experiment pulse     t v_filter   v
+1567          9     0 45716      542 544
+1571          9     0 49726      542 544
+1572          9     0 50729      542 544
+1575          9     0 53736      542 544
+1576          9     0 54739      544 544
+1577          9     0 55741      544 544
+1585          9     0 63762      542 544
+     experiment pulse     t v_filter   v
+1238          8     0 41907      538 540
+1242          8     0 45917      538 540
+1243          8     0 46919      538 540
+1244          8     0 47922      538 540
+1246          8     0 49927      538 540
+1247          8     0 50929      540 540
+1248          8     0 51932      540 540
+1251          8     0 54939      540 540
+1252          8     0 55942      540 540
+    experiment pulse     t v_filter   v
+963          7     0 52533      534 536
+964          7     0 53536      536 536
+966          7     0 55541      536 536
+967          7     0 56543      536 536
+968          7     0 57547      536 536
+    experiment pulse     t v_filter   v
+695          6     0 28372      530 532
+696          6     0 29375      530 532
+    experiment pulse     t v_filter   v
+477          5     0 28573      528 530
+    experiment pulse     t v_filter   v
+296          4     0 25865      524 525
+297          4     0 26867      524 525
+    experiment pulse     t v_filter   v
+167          3     0 28973      518 519
+168          3     0 29975      518 519
+169          3     0 30978      518 519
+   experiment pulse    t v_filter   v
+35          2     1 2607      514 515
+  experiment pulse    t v_filter   v
+2          1     1 1704      510 512
+> 
+> proc.time()
+   user  system elapsed 
+  0.246   0.023   0.259 

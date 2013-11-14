@@ -1,0 +1,58 @@
+
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> # The purpose of this script is to figure out the regression line for
+> # mapping voltage to temperature from the kettle.
+> #
+> # This file reads in a CSV of voltage (x) and temperature in c (y) values.
+> # It produces a plot with a second order polynomial regression line. In 
+> # the text output the results of the regression line are printed.
+> data <- read.table("./thermal.csv", header=TRUE, sep=",")
+> plot(data$x, data$y)
+> fit <- lm(data$y ~ data$x+I(data$x^2))
+> summary(fit)
+
+Call:
+lm(formula = data$y ~ data$x + I(data$x^2))
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-3.170 -1.310 -0.495  1.347  4.306 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   0.3611     2.0763   0.174  0.86624    
+data$x       49.3436     3.9987  12.340 1.73e-06 ***
+I(data$x^2)  -5.5215     1.2662  -4.361  0.00241 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.322 on 8 degrees of freedom
+Multiple R-squared:  0.9967,	Adjusted R-squared:  0.9959 
+F-statistic:  1209 on 2 and 8 DF,  p-value: 1.181e-10
+
+> xx <- seq(min(data$x),max(data$x),len=100)
+> yy <- fit$coef %*% rbind(1,xx,xx^2)
+> lines(xx,yy,lwd=2,col=3)
+> 
+> proc.time()
+   user  system elapsed 
+  0.278   0.030   0.319 

@@ -1,0 +1,53 @@
+
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> # Time to Impact
+> 
+> data <- read.table("./input.csv", header=TRUE, sep=",")
+> 
+> for (i in 10:1) {
++     focus   <- subset(data, experiment==i)
++     focus   <- focus[focus$v > 515,]
++     if(nrow(focus) > 0) {
++         t_line  <- focus[focus$t == min(focus$t),]
++         print(t_line)
++     }
++ }
+     experiment pulse     t v_filter   v
+1904         10     1 17044      514 516
+     experiment pulse     t v_filter   v
+1538          9     1 16642      514 516
+     experiment pulse     t v_filter   v
+1214          8     0 17845      516 518
+    experiment pulse     t v_filter   v
+928          7     0 17444      515 517
+    experiment pulse     t v_filter   v
+685          6     0 18347      515 517
+    experiment pulse     t v_filter   v
+467          5     0 18548      514 516
+    experiment pulse     t v_filter   v
+289          4     0 18847      514 516
+    experiment pulse     t v_filter   v
+163          3     0 24963      516 517
+> 
+> proc.time()
+   user  system elapsed 
+  0.249   0.026   0.265 
